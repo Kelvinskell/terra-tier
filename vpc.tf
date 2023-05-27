@@ -21,7 +21,3 @@ module "vpc" {
     Environment = "prod"
   }
 }
-
-output "vpc_id" {
-  value = "${module.vpc}"
-}
