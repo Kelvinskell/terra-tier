@@ -15,6 +15,7 @@ block_device_mappings {
     associate_public_ip_address = false
   }
 
+ vpc_security_group_ids = [aws_security_group.Allow_ALB.id]
 
   tag_specifications {
     resource_type = "instance"
