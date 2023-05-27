@@ -1,13 +1,8 @@
 # Create locals
 locals {
-    ingress = [{
-        port = 443
-        description = "Port 443"
-        protocol = "tcp"
-    },
-    {
-        port = 80
-        description = "Port 80"
+    ingress =[{
+        port = 5000
+        description = "Flask port"
         protocol = "tcp"
     }
     ]
