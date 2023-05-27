@@ -14,7 +14,7 @@ locals {
 }
 
 # Security group for application layer
-resource "aws_security_group" "allow_tls" {
+resource "aws_security_group" "Allow_ALB" {
   name = "project-x-logic-tier-sg"
   description        = "Allow only authorized access to logic layer"
   vpc_id   = module.vpc.vpc_id
@@ -41,5 +41,6 @@ resource "aws_security_group" "allow_tls" {
 
   tags = {
     Environment = "prod"
+    Name = "project-x-logic-tier-sg"
   }
 }
