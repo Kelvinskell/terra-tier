@@ -6,9 +6,11 @@ resource "aws_lb" "alb" {
   security_groups    = [aws_security_group.alb-sg.id]
   subnets            = flatten([module.vpc.public_subnets[*]])
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   tags = {
     Environment = "prod"
   }
 }
+
+# Create target group
