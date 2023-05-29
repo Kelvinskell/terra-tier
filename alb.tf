@@ -16,7 +16,7 @@ resource "aws_lb" "alb" {
 # Create a new load balancer attachment
 resource "aws_autoscaling_attachment" "asg_attachment" {
   autoscaling_group_name = aws_autoscaling_group.asg.name
-  elb                    = aws_lb.alb
+  elb                    = aws_lb.alb.id
 
   depends_on = [ aws_autoscaling_group.asg ]
 }
@@ -31,7 +31,7 @@ resource "aws_lb_target_group" "tg" {
 
 # create target group attachment
 resource "aws_lb_target_group_attachment" "tg" {
-  target_group_arn = aws_lb_target_group.tg
+  target_group_arn = aws_lb_target_group.tg.arn
   target_id        = aws_lb.alb.arn
   port             = 80
 }
