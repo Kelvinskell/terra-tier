@@ -20,4 +20,8 @@ resource "aws_autoscaling_group" "asg" {
       min_healthy_percentage = 50
     }
   }
+  tag {
+    Name = "project-x-asg-logic-tier-server"
+    Environment = "prod"
+  }
 }
