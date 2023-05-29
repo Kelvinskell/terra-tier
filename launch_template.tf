@@ -5,9 +5,11 @@ block_device_mappings {
     device_name = "/dev/sdf"
     ebs {
       volume_size = 20
+      delete_on_termination = true
+      encrypted = true    
     }
 }
-  ebs_optimized = true
+  ebs_optimized = false
   image_id = var.image_id
   instance_type = var.instance_type
 
@@ -22,8 +24,7 @@ block_device_mappings {
     resource_type = "instance"
 
     tags = {
-      Name = "project-x-logic-tier-template",
-      Environment = "prod"
+      Name = "project-x-logic-tier-server",
     }
-  }
+  }  
 }
