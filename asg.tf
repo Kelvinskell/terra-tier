@@ -21,7 +21,7 @@ resource "aws_autoscaling_group" "asg" {
     }
   }
   tag {
-    Name = "project-x-asg-logic-tier-server"
     Environment = "prod"
+    propagate_at_launch = true
   }
 }
