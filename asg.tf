@@ -29,8 +29,8 @@ resource "aws_autoscaling_group" "asg" {
     id = aws_launch_template.project-x-template.id
     version = "$Latest"
   }
-  vpc_zone_identifier       = [module.vpc.aws_subnet.private[*]]
-  
+  vpc_zone_identifier       = flatten([module.vpc.private_subnets[*]])
+
   # Refresh instances if ASG is updated
   instance_refresh {
     strategy = "Rolling"
@@ -40,7 +40,8 @@ resource "aws_autoscaling_group" "asg" {
   }
 
   tag {
-    Environment = "prod"
+    key = "Environment"
+    value = "prod"
     propagate_at_launch = true
   }
 }
