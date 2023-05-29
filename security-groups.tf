@@ -66,10 +66,10 @@ resource "aws_security_group" "alb-sg" {
   dynamic "ingress" {
     for_each = local.ingress-alb
     content {
-    description      = ingress-alb.value.description
-    from_port        = ingress-alb.value.port
-    to_port          = ingress-alb.value.port
-    protocol         = ingress-alb.value.protocol
+    description      = ingress.value.description
+    from_port        = ingress.value.port
+    to_port          = ingress.value.port
+    protocol         = ingress.value.protocol
     cidr_blocks      = ["0.0.0.0/0"]
     }
 }
