@@ -1,3 +1,20 @@
+# Create scaling policy
+resource "aws_autoscaling_policy" "asg-policy" {
+  autoscaling_group_name = aws_autoscaling_group.asg.name
+  name                   = "project-x-asg-policy"
+  policy_type            = "TargetTrackingScaling"
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+    target_value = 50.0
+  }
+
+  depends_on = [ 
+    aws_autoscaling_group.asg
+      ]
+}
+
 # Create an AutoScaling Group
 resource "aws_autoscaling_group" "asg" {
   name                      = "project-x-asg"
@@ -13,6 +30,7 @@ resource "aws_autoscaling_group" "asg" {
     version = "$Latest"
   }
   vpc_zone_identifier       = [module.vpc.aws_subnet.private[*]]
+  
   # Refresh instances if ASG is updated
   instance_refresh {
     strategy = "Rolling"
@@ -20,6 +38,7 @@ resource "aws_autoscaling_group" "asg" {
       min_healthy_percentage = 50
     }
   }
+
   tag {
     Environment = "prod"
     propagate_at_launch = true
