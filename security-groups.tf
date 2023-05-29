@@ -51,7 +51,7 @@ resource "aws_security_group" "Allow_ALB" {
 
   tags = {
     Environment = "prod"
-    Name = "project-x-logic-tier-sg"
+    Name = "project-x-alb-sg"
   }
 }
 
