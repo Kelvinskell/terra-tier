@@ -58,7 +58,7 @@ resource "aws_security_group" "Allow_ALB" {
 
 # Create security group for load balancer
 resource "aws_security_group" "alb-sg" {
-  name = "project-x-logic-tier-sg"
+  name = "project-x-alb-sg"
   description        = "Allow only authorized access to logic layer"
   vpc_id   = module.vpc.vpc_id
 
@@ -87,4 +87,9 @@ lifecycle {
   }
 
   depends_on = [ aws_security_group.Allow_ALB ]
+
+   tags = {
+    Environment = "prod"
+    Name = "project-x-logic-tier-sg"
+  }
 }
