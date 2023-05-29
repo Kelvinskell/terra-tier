@@ -6,10 +6,19 @@ resource "aws_autoscaling_group" "asg" {
   desired_capacity          = 4
   health_check_grace_period = 300
   health_check_type         = "EC2"
-  force_delete              = true
+  force_delete              = false
+  termination_policies = ["ClosestToNextInstanceHour", "Default"]
   launch_template {
     id = aws_launch_template.project-x-template.id
-    version = "$LATEST"
+    version = "$Latest"
   }
   vpc_zone_identifier       = [module.vpc.aws_subnet.private[*]]
+}
+
+# Refresh instances if ASG is updated
+instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 50
+    }
 }
