@@ -13,12 +13,11 @@ resource "aws_autoscaling_group" "asg" {
     version = "$Latest"
   }
   vpc_zone_identifier       = [module.vpc.aws_subnet.private[*]]
-}
-
-# Refresh instances if ASG is updated
-instance_refresh {
+  # Refresh instances if ASG is updated
+  instance_refresh {
     strategy = "Rolling"
     preferences {
       min_healthy_percentage = 50
     }
+  }
 }
