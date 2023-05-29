@@ -51,7 +51,7 @@ resource "aws_security_group" "Allow_ALB" {
 
   tags = {
     Environment = "prod"
-    Name = "project-x-alb-sg"
+    Name = "project-x-logic-tier-sg"
   }
 }
 
@@ -90,6 +90,34 @@ lifecycle {
 
    tags = {
     Environment = "prod"
-    Name = "project-x-logic-tier-sg"
+    Name = "project-x-alb-sg"
+  }
+}
+
+# Create security group for EFS
+# Security group for application layer servers
+resource "aws_security_group" "Allow_NFS" {
+  name = "project-x-efs-sg"
+  description        = "Allow NFS From Logic layer"
+  vpc_id   = module.vpc.vpc_id
+
+  ingress {
+    description      = "NFS from Logic layer"
+    from_port        = 2049
+    to_port          = 2049
+    protocol         = "tcp"
+    security_groups = aws_security_group.Allow_ALB.id
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = project-x-efs-asg,
+    Environment = "prod"
   }
 }
