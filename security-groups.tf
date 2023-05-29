@@ -106,7 +106,7 @@ resource "aws_security_group" "Allow_NFS" {
     from_port        = 2049
     to_port          = 2049
     protocol         = "tcp"
-    security_groups = aws_security_group.Allow_ALB.id
+    security_groups = [aws_security_group.Allow_ALB.id]
   }
 
   egress {
@@ -117,7 +117,7 @@ resource "aws_security_group" "Allow_NFS" {
   }
 
   tags = {
-    Name = project-x-efs-asg,
+    Name = "project-x-efs-asg",
     Environment = "prod"
   }
 }
