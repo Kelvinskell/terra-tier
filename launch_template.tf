@@ -17,7 +17,6 @@ block_device_mappings {
     delete_on_termination = true
   }
 
- vpc_security_group_ids = [aws_security_group.Allow_ALB.id]
  user_data = filebase64("./user_data.sh")
   tag_specifications {
     resource_type = "instance"
