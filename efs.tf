@@ -42,3 +42,8 @@ resource "aws_efs_mount_target" "mount3" {
   subnet_id      = module.vpc.private_subnets[2]
   security_groups = [aws_security_group.Allow_NFS.id]
 }
+
+# Create EFS Access Point
+resource "aws_efs_access_point" "point" {
+  file_system_id = aws_efs_file_system.efs.id
+}
