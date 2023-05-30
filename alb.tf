@@ -45,4 +45,8 @@ resource "aws_lb_listener" "http" {
       }
     }
   }
+  tags = {
+    Name = "project-x-alb-listener"
+    Environment = "prod"
+  }
 }
