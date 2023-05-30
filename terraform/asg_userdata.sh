@@ -13,7 +13,7 @@ apt install python3-venv
 apt install python3-flask -y
 
 # Run Flask Application
-git clone https://github.com/Kelvinskell/newsread.git
-cd /newsread
+git clone git@github.com:Kelvinskell/terra-tier.git
+cd /terra-tier
 export FLASK_APP=run.py
 flask run -p 5000
