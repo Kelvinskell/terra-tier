@@ -14,7 +14,7 @@ block_device_mappings {
   instance_type = var.instance_type
   key_name = aws_key_pair.security_key.key_name
   iam_instance_profile {
-    arn = aws_iam_role.server_role.arn
+    name = aws_iam_role.server_role.name
   }
 
    network_interfaces {
