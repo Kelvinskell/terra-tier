@@ -16,4 +16,5 @@ apt install python3-flask -y
 git clone git@github.com:Kelvinskell/terra-tier.git
 cd /terra-tier
 export FLASK_APP=run.py
+export FLASK_ENV=development
 flask run -p 5000
