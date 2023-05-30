@@ -19,7 +19,7 @@ block_device_mappings {
     delete_on_termination = true
   }
 
- user_data = filebase64("./user_data.sh")
+ user_data = filebase64("./userdata.sh")
   tag_specifications {
     resource_type = "instance"
 
