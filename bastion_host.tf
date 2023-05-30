@@ -9,6 +9,10 @@ resource "aws_instance" "bastion" {
     Name = "project-x-Bastion-Host"
     Environment = "prod"
   }
+
+  lifecycle {
+    replace_triggered_by = [ module.vpc.vpc_id ]
+  }
 }
 
 # Print Public Ip address
