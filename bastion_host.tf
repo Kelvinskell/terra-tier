@@ -11,6 +11,12 @@ resource "aws_instance" "bastion" {
   }
 }
 
+# Use external data source to invoke user data
+data "template_file" "user_data" {
+    template = file("./bastion_userdata.yaml")
+}
+
+
 /*# Create an EC2 key-pair
 resource "aws_key_pair" "ec2_key" {
   key_name   = "my-tf-ec2-key"
