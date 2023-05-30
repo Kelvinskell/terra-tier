@@ -30,7 +30,6 @@ resource "aws_route_table_association" "rt-a" {
   subnet_id      = aws_subnet.bastion_sub.id
   route_table_id = aws_route_table.bastion_rt.id
 }
-
   
 
 # Create bastion host
@@ -60,3 +59,8 @@ resource "aws_key_pair" "bastion_key" {
  # YOU MUST REPLACE THE VALUE OF THE PUBLIC_KEY ABOVE WITH YOUR OWN GENERATED PUBLIC_KEY
  # YOU MUST USE THE SSH-KEYGEN COMMAND TO GENERATE A PUBLIC AND PRIVATE KEY. 
  # IF YOU DON'T DO THIS, YOU WILL NOT BE ABLE TO HAVE SSH ACCESS TO YOUR INSTANCE
+
+ # Print Public IP address of bastion host
+output "public_ip" {
+    value = aws_instance.bastion.public_ip
+}
