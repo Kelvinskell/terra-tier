@@ -4,6 +4,7 @@ resource "aws_instance" "bastion" {
   instance_type = var.instance_type
   key_name = "${aws_key_pair.bastion_key.key_name}"
   vpc_security_group_ids = [ aws_security_group.bastion-sg.id ]
+  subnet_id = flatten([module.vpc.public_subnets[0]])
   user_data = data.template_file.user_data.rendered
   tags = {
     Name = "project-x-Bastion-Host"
