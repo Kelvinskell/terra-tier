@@ -4,8 +4,14 @@ locals {
         port = 5000
         description = "Flask port"
         protocol = "tcp"
+    },
+    {
+      port = 22
+      description = "SSH port"
+      protocol = "tcp"
     }
     ]
+
   ingress-alb = [
     {
       port = 80
@@ -19,6 +25,7 @@ locals {
     }
   ]
 }
+
 # Security group for application layer servers
 resource "aws_security_group" "Allow_ALB" {
   name = "project-x-logic-tier-sg"
