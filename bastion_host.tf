@@ -1,10 +1,24 @@
+# Create Public subnet for bastion host
+resource "aws_subnet" "bastion_sub" {
+  vpc_id     = mocule.vpc.vpc_id
+  cidr_block = "10.0.48.0/20"
+  availability_zone = var.bastion_host_az
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "project-x-bastion-host-public-subnet"
+    Environment = "prod"
+  }
+}
+
+
 # Create bastion host
 resource "aws_instance" "bastion" {
   ami           = var.image_id
   instance_type = var.instance_type
   key_name = "${aws_key_pair.bastion_key.key_name}"
   vpc_security_group_ids = [ aws_security_group.bastion-sg.id ]
-  subnet_id = flatten([module.vpc.public_subnets[0]])
+  subnet_id = aws_subnet.bastion_sub.id
   user_data = data.template_file.user_data.rendered
   tags = {
     Name = "project-x-Bastion-Host"
