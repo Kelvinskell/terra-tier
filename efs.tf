@@ -1,16 +1,7 @@
-# Create subnet for Elastic Filesystem
-/*resource "aws_subnet" "efs_subnet" {
-  vpc_id     = module.vpc.vpc_id
-  cidr_block = "10.0.48.0/20"
-
-  tags = {
-    Name = "project-x-efs-subnet"
-  }
-}*/
-
 # Create Elastic Filesystem for Logic Layer Servers
 resource "aws_efs_file_system" "efs" {
   creation_token = "project-x"
+  encrypted = true
 
   lifecycle_policy {
     transition_to_ia = "AFTER_30_DAYS"
