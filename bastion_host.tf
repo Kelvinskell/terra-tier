@@ -11,6 +11,27 @@ resource "aws_subnet" "bastion_sub" {
   }
 }
 
+# Create route table for bastion_sub
+resource "aws_route_table" "bastion_rt" {
+  vpc_id = module.vpc.vpc_id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = module.vpc.igw_id
+  }
+
+  tags = {
+    Name = "project-x-bastion-host-rt"
+  }
+}
+
+# Create route table association
+resource "aws_route_table_association" "rt-a" {
+  subnet_id      = aws_subnet.bastion_sub.id
+  route_table_id = aws_route_table.bastion_rt.id
+}
+
+  
 
 # Create bastion host
 resource "aws_instance" "bastion" {
