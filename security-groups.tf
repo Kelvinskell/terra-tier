@@ -102,7 +102,6 @@ lifecycle {
 }
 
 # Create security group for EFS
-# Security group for application layer servers
 resource "aws_security_group" "Allow_NFS" {
   name = "project-x-efs-sg"
   description        = "Allow NFS From Logic layer"
@@ -124,7 +123,34 @@ resource "aws_security_group" "Allow_NFS" {
   }
 
   tags = {
-    Name = "project-x-efs-asg",
+    Name = "project-x-efs-sg",
+    Environment = "prod"
+  }
+}
+
+# Create security group for bastion host
+resource "aws_security_group" "Allow_NFS" {
+  name = "project-x-efs-sg"
+  description        = "Allow NFS From Logic layer"
+  vpc_id   = module.vpc.vpc_id
+
+  ingress {
+    description = "Allow SSH from everywhere"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = [0.0.0.0/0]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "project-x-bastion-host-sg",
     Environment = "prod"
   }
 }
