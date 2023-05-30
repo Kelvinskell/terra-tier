@@ -1,6 +1,6 @@
 # Create bastion host
 resource "aws_instance" "bastion" {
-  ami           = var.ami
+  ami           = var.image_id
   instance_type = var.instance_type
   # key_name = "${aws_key_pair.ec2_key.key_name}"
   vpc_security_group_ids = [ aws_security_group.bastion-sg ]
