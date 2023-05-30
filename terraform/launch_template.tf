@@ -13,6 +13,9 @@ block_device_mappings {
   image_id = var.image_id
   instance_type = var.instance_type
   key_name = aws_key_pair.security_key.key_name
+  iam_instance_profile {
+    arn = aws_iam_role.server_role.arn
+  }
 
    network_interfaces {
     security_groups = [aws_security_group.Allow_ALB.id]
