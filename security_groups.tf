@@ -130,7 +130,7 @@ resource "aws_security_group" "Allow_NFS" {
 
 # Create security group for bastion host
 resource "aws_security_group" "bastion-sg" {
-  name = "project-x-efs-sg"
+  name = "project-x-bastion-host-sg"
   description        = "Allow NFS From Logic layer"
   vpc_id   = module.vpc.vpc_id
 
