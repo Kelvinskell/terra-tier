@@ -1,0 +1,53 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+NewsRead - Breaking News
+{% endblock %}
+
+{% block content %}
+{% for item in items %}
+<br >
+<article>
+          <div class="blog-post-header-div">
+		  <a class="blog-post-title" href="{{ item.url  }}" target=_blank><header><h1><strong>{{ item.title }}</strong></h1></header></a>
+    </div>
+
+    {% if item.image != None %}
+    <img src="{{ item.image }}" />
+    {% else %}
+    <img src="{{ item.backup_image }}" />
+    {% endif %}
+
+    <br >
+    <p>{{ item.description  }}</p>
+    <br >
+  </article>
+    {% endfor %}
+<style>
+body{
+        background-color: #212121;
+}
+img{
+  float: left;
+  margin-right: 1em;
+  height: 150px;
+}
+article{
+  background: white;
+  color: blue;
+  padding: 1px;
+  overflow: auto;
+}
+#heading{
+  clear: right;
+}
+.blog-post-header-div{
+        background-color: #212121;
+}
+.blog-post-title{
+        text-align: center;
+        color: white;
+
+}
+</style>
+{% endblock %}

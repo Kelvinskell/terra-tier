@@ -1,0 +1,36 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+NewsRead - Customize Feed
+{% endblock %}
+
+{% block content %}
+<h1><strong>Customize Your News Feed</strong></h1>
+<br >
+<p>Only news from your selections will be displayed.</p>
+<table>
+       <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+		<th scope="col"><h1><strong>Country</strong></h1></th>
+		<th scope="col"></th>
+		<th scope="col"><h1><strong>Language</strong></h1></th>
+		<th scope="col"></th>
+		<th scope="col"><h1><strong>Category</strong></h1></th>
+		<th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+		{% for item in items %}
+		<tr>
+			<td><strong>{{ item.country }}</strong></td>
+			<td><button class="btn btn-outline btn-success">Select</button></td>
+			<td><strong>{{ item.language }}</strong></td>
+			<td><button class="btn btn-outline btn-success">Select</button></td>
+			<td><strong>{{ item.category }}</strong></td>
+			<td><button class="btn btn-outline btn-success">Select</button></td>
+		</tr>
+		{% endfor %}
+        </tbody>
+  </table>
+{% endblock %}
