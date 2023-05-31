@@ -1,5 +1,6 @@
 # create a RDS Database Instance
 resource "aws_db_instance" "mysql_instance" {
+  db_name = "newsreadb"
   engine               = "mysql"
   identifier           = "database-1"
   allocated_storage    =  20
