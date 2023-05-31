@@ -29,3 +29,9 @@ variable "bastion_cidr" {
     default = "10.0.48.0/20"
     sensitive = false
 }
+
+variable "bastion_image_id" {
+    type = string
+    description = "Image id of the bastion host"
+    default = "t2.micro"
+}
