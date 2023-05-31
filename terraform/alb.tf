@@ -26,6 +26,17 @@ resource "aws_lb_target_group" "tg" {
   port     = 5000
   protocol = "HTTP"
   vpc_id   = module.vpc.vpc_id
+  health_check {
+    enabled = true
+    healthy_threshold = 2
+    interval = 120
+    matcher = "200-299"
+    path = "/"
+    port = 5000
+    protocol = "HTTP"
+    timeout = 20
+    unhealthy_threshold = 4
+  }
 }
 
 
