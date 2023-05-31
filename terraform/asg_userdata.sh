@@ -1,11 +1,15 @@
 #!/bin/bash
 
+# Change hostname
+echo "project-x-app-server" > /etc/hostname
+
 # Mount EFS
 fsname=fs-093de1afae7166759.efs.us-east-1.amazonaws.com # You must change this value to represent your EFS DNS name.
 mkdir /efs
 mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $fsname:/ /efs
 
 # install and set up Flask
+apt-get -o Acquire::ForceIPv4=true update
 apt-get update -y && apt-get upgrade -y 
 apt-get install python3-flask mysql-client mysql-server python3-pip python3-venv -y 
 apt-get install sox ffmpeg libcairo2 libcairo2-dev -y 
