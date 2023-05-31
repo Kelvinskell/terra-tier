@@ -30,7 +30,7 @@ variable "bastion_cidr" {
     sensitive = false
 }
 
-variable "bastion_image_id" {
+variable "bastion_instance_type" {
     type = string
     description = "Image id of the bastion host"
     default = "t2.micro"
