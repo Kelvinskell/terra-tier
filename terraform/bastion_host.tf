@@ -1,7 +1,7 @@
 # Create Public subnet for bastion host
 resource "aws_subnet" "bastion_sub" {
   vpc_id     = module.vpc.vpc_id
-  cidr_block = "10.0.48.0/20"
+  cidr_block = var.bastion_cidr
   availability_zone = var.bastion_host_az
   map_public_ip_on_launch = true
 

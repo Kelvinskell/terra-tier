@@ -22,3 +22,10 @@ variable "bastion_host_az" {
     type = string
     default = "us-east-1a"
 }
+
+variable "bastion_cidr" {
+    type = string
+    description = "CIDR block for the bastion host's public subnet"
+    default = "10.0.48.0/20"
+    sensitive = false
+}
