@@ -9,7 +9,6 @@ mkdir /efs
 mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $fsname:/ /efs
 
 # install and set up Flask
-apt install python3-venv
 apt install python3-flask mysql-client mysql-server python-pip3 python3-venv -y
 apt install sox ffmpeg libcairo2 libcairo2-dev texlive-full -y
 apt install python3-dev default-libmysqlclient-dev build-essential -y
