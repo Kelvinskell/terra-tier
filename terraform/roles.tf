@@ -57,6 +57,29 @@ resource "aws_iam_role" "server_role" {
             "Effect": "Allow",
             "Action": "autoscaling:Describe*",
             "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kms:DescribeKey",
+                "kms:ListAliases",
+                "kms:ListKeys",
+                "rds:DescribeDBClusters",
+                "rds:DescribeDBInstances",
+                "tag:GetResources"
+            ],
+             "Resource": "*"
+        },
+        {
+            {
+			"Effect": "Allow",
+			"Action": [
+				"secretsmanager:GetSecretValue",
+				"secretsmanager:DescribeSecret",
+				"secretsmanager:ListSecrets"
+			],
+			"Resource": "*"
+		}
         }
     ]
 }
