@@ -71,6 +71,13 @@ resource "aws_iam_role" "server_role" {
              "Resource": "*"
         },
         {
+            "Effect": "Allow",
+            "Action": [
+                "elasticfilesystem:DescribeFileSystems"
+            ]
+            "Resource": "*"
+        },
+        {
 			"Effect": "Allow",
 			"Action": [
 				"secretsmanager:GetSecretValue",
