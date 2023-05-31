@@ -29,7 +29,7 @@ resource "aws_lb_target_group" "tg" {
   health_check {
     enabled = true
     healthy_threshold = 2
-    interval = 120
+    interval = 60
     matcher = "200-299"
     path = "/"
     port = 5000
