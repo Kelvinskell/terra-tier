@@ -2,9 +2,9 @@ resource "aws_launch_template" "project-x-template" {
   name = "project-x-logic-tier-template"
 
 block_device_mappings {
-    device_name = "/dev/sdf"
+    device_name = "/dev/sda1"
     ebs {
-      volume_size = 50
+      volume_size = 30
       delete_on_termination = true
       encrypted = true    
     }
