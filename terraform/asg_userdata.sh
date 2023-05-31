@@ -15,7 +15,7 @@ apt install python3-dev default-libmysqlclient-dev build-essential -y
 
 # Clone the app
 git clone https://github.com/Kelvinskell/terra-tier.git
-cd terra-tier
+cd /terra-tier
 
 # setup virtual environment
 python3 -m venv venv
