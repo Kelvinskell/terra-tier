@@ -6,11 +6,10 @@ mkdir /efs
 mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $fsname:/ /efs
 
 # install and set up Flask
-apt update
-apt upgrade -y
-apt install python3-flask mysql-client mysql-server python3-pip python3-venv -y
-apt install sox ffmpeg libcairo2 libcairo2-dev -y
-apt install python3-dev default-libmysqlclient-dev build-essential -y
+apt-get update -y && apt-get upgrade -y 
+apt-get install python3-flask mysql-client mysql-server python3-pip python3-venv -y 
+apt-get install sox ffmpeg libcairo2 libcairo2-dev -y 
+apt-get install python3-dev default-libmysqlclient-dev build-essential -y 
 
 # Clone the app
 git clone https://github.com/Kelvinskell/terra-tier.git
