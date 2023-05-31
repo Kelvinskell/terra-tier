@@ -23,7 +23,7 @@ resource "aws_db_instance" "mysql_instance" {
 }
 
 # Create db subnet group
-resource "aws_db_subnet_group" "default" {
+resource "aws_db_subnet_group" "db_group" {
   name       = "project-x-rds-subnet-group"
   subnet_ids = flatten([module.vpc.private_subnets])
 
