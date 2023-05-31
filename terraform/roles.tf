@@ -36,7 +36,11 @@ resource "aws_iam_role" "server_role" {
     "Statement": [
         {
             "Effect": "Allow",
-            "Action": "ec2:Describe*",
+            "Action": [
+                "ec2:Describe*",
+                "rds:Describe*",
+                "rds:ListTagsForResource",
+            ],
             "Resource": "*"
         },
         {
