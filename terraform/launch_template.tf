@@ -4,7 +4,7 @@ resource "aws_launch_template" "project-x-template" {
 block_device_mappings {
     device_name = "/dev/sdf"
     ebs {
-      volume_size = 20
+      volume_size = 50
       delete_on_termination = true
       encrypted = true    
     }
