@@ -164,7 +164,7 @@ resource "aws_security_group" "mysql_sg" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.Allow_ALB]
+    security_groups = [aws_security_group.Allow_ALB.id]
   }
   egress {
     from_port   = 0
