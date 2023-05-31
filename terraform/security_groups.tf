@@ -160,6 +160,8 @@ resource "aws_security_group" "bastion-sg" {
 # create a security group for RDS MYSQL Database Instance
 resource "aws_security_group" "mysql_sg" {
   name = "project-x-rds-mysql-sg"
+  description        = "Allow database connections From Logic layer"
+  vpc_id   = module.vpc.vpc_id
   ingress {
     from_port       = 3306
     to_port         = 3306
