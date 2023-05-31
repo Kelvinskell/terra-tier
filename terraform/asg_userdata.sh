@@ -1,16 +1,15 @@
 #!/bin/bash
 
-apt update
-apt upgrade -y
-
 # Mount EFS
 fsname=fs-093de1afae7166759.efs.us-east-1.amazonaws.com # You must change this value to represent your EFS DNS name.
 mkdir /efs
 mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $fsname:/ /efs
 
 # install and set up Flask
+apt update
+apt upgrade -y
 apt install python3-flask mysql-client mysql-server python3-pip python3-venv -y
-apt install sox ffmpeg libcairo2 libcairo2-dev texlive-full -y
+apt install sox ffmpeg libcairo2 libcairo2-dev -y
 apt install python3-dev default-libmysqlclient-dev build-essential -y
 
 # Clone the app
