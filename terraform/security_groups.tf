@@ -1,11 +1,6 @@
 # Create locals
 locals {
     ingress =[{
-        port = 5000
-        description = "Flask port"
-        protocol = "tcp"
-    },
-    {
       port = 22
       description = "SSH port"
       protocol = "tcp"
@@ -40,9 +35,16 @@ resource "aws_security_group" "Allow_ALB" {
     from_port        = ingress.value.port
     to_port          = ingress.value.port
     protocol         = ingress.value.protocol
-    cidr_blocks      = [module.vpc.vpc_cidr_block]
+    cidr_blocks      = [module.vpc.vpc_cidr_block] 
     }
 }
+ingress {
+    description      = "FLASK PORT FROM ALB"
+    from_port        = 5000
+    to_port          = 5000
+    protocol         = "tcp"
+    security_groups = [aws_security_group.alb-sg]
+  }
 
   egress {
     from_port        = 0
@@ -85,7 +87,7 @@ resource "aws_security_group" "alb-sg" {
     from_port        = 5000
     to_port          = 5000
     protocol         = "tcp"
-    security_groups = [aws_security_group.Allow_ALB.id]
+    cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
 
