@@ -42,6 +42,7 @@ resource "aws_iam_instance_profile" "server_profile" {
         Environment = "prod"
     }
 }
+}
 
 # Define policy document
 data "aws_iam_policy_document" "assume_role" {
