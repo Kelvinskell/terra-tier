@@ -1,4 +1,4 @@
 #cloud-config
 
 runcmd:
-  - echo "bastion_host" > /etc/hostname
+  - echo "project-x-bastion_host" > /etc/hostname

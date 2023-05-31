@@ -34,8 +34,8 @@ resource "aws_route_table_association" "rt-a" {
 
 # Create bastion host
 resource "aws_instance" "bastion" {
-  ami           = var.bastion_image_id
-  instance_type = var.instance_type
+  ami           = var.image_id
+  instance_type = var.bastion_instance_type
   key_name = "${aws_key_pair.security_key.key_name}"
   vpc_security_group_ids = [ aws_security_group.bastion-sg.id ]
   subnet_id = aws_subnet.bastion_sub.id
