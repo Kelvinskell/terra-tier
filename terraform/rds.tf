@@ -9,7 +9,7 @@ resource "aws_db_instance" "mysql_instance" {
   username             = "project_x_user"
   manage_master_user_password = true
   parameter_group_name = "default.mysql8.0"
-  vpc_security_group_ids = [aws_security_group.mysql_sg]
+  vpc_security_group_ids = [aws_security_group.mysql_sg.id]
   allow_major_version_upgrade = true
   skip_final_snapshot  = true
   publicly_accessible =  false
