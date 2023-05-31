@@ -34,7 +34,7 @@ resource "aws_lb_target_group" "tg" {
     path = "/"
     port = 5000
     protocol = "HTTP"
-    timeout = 20
+    timeout = 10
     unhealthy_threshold = 4
   }
 }
