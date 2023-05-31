@@ -26,6 +26,7 @@ locals {
   ]
 }
 
+
 # Security group for application layer servers
 resource "aws_security_group" "Allow_ALB" {
   name = "project-x-logic-tier-sg"
@@ -152,5 +153,23 @@ resource "aws_security_group" "bastion-sg" {
   tags = {
     Name = "project-x-bastion-host-sg",
     Environment = "prod"
+  }
+}
+
+
+# create a security group for RDS MYSQL Database Instance
+resource "aws_security_group" "mysql_sg" {
+  name = "project-x-rds-mysql-sg"
+  ingress {
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    security_groups = [aws_security_group.Allow_ALB]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
