@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Use Google's DNS
-echo "nameserver 8.8.8.8" > /etc/resolv.conf
+echo "nameserver 8.8.8.8" >> /etc/resolv.conf
 
 # Force apt to use IPV4
 apt-get -o Acquire::ForceIPv4=true update
@@ -37,17 +37,23 @@ apt-get install sox ffmpeg libcairo2 libcairo2-dev -y
 apt-get install python3-dev default-libmysqlclient-dev build-essential -y 
 
 # Clone the app
+cd /
 git clone https://github.com/Kelvinskell/terra-tier.git
 cd /terra-tier
 
 # Populate App with environmental variables
 echo "MYSQL_ROOT_PASSWORD=$PASSWORD" > .env
 cd /terra-tier/application
-echo "MYSQL_DB=$MDB" > .env
+echo "MYSQL_DB=$DB" > .env
 echo "MYSQL_HOST=$HOST" >> .env
 echo "MYSQL_USER=$USER" >> .env
 echo "DATABASE_PASSWORD=$PASSWORD" >> .env
 echo "MYSQL_ROOT_PASSWORD=$PASSWORD" >> .env
+echo "SECRET_KEY=08dae760c2488d8a0dca1bfb" >> /.env # FLASK EXTENSION KEY. NOT NECESSARILY A "SECRET".
+echo "API_KEY=f39307bb61fb31ea2c458479762b9acc" >> .env 
+# YOU TYPICALLY DON'T ADD SECRETS SUCH AS API KEYS AS PART OF SOURCE CONTROL IN PLAIN TEXT.
+# THIS IS BEIGN ADDED HERE SO THAT YOU CAN EASILY REPLICATE THIS INFRASTRUCTURE WITHOUT ANY HASSLES.
+# YOU CAN REPLACE IT WITH YOUR OWN MEDIASTACK API KEY.
 
 # Setup virtual environment
 cd /terra-tier
