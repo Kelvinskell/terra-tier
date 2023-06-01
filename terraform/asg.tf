@@ -47,6 +47,7 @@ resource "aws_autoscaling_group" "asg" {
 
   lifecycle {
     ignore_changes = [ load_balancers, target_group_arns ]
+    replace_triggered_by = [ aws_db_instance.mysql_instance ]
   }
   depends_on = [
     aws_efs_file_system.efs,
