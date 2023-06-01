@@ -1,15 +1,36 @@
 #!/bin/bash
 
+# Use Google's DNS
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
+
+# Force apt to use IPV4
+apt-get -o Acquire::ForceIPv4=true update
+
 # Change hostname
 echo "project-x-app-server" > /etc/hostname
 
-# Mount EFS
-fsname=fs-093de1afae7166759.efs.us-east-1.amazonaws.com # You must change this value to represent your EFS DNS name.
+# Install efs-utils
+apt-get install awscli -y
 mkdir /efs
-mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $fsname:/ /efs
+sudo apt-get -y install git binutils
+git clone https://github.com/aws/efs-utils
+cd /efs-utils
+./build-deb.sh
+apt-get -y install ./build/amazon-efs-utils*deb
+
+# Mount EFS
+fsname=$(aws efs describe-file-systems --region us-east-1 --creation-token project-x --output table |grep FileSystemId |awk '{print $(NF-1)}')
+mount -t efs $fsname /efs
+
+# Get DB credentials
+DB=$(aws rds describe-db-instances --db-instance-identifier --region us-east-1 database-1 --output table |grep DBName |awk '{print $(NF-1)}')
+HOST=$( aws rds describe-db-instances --db-instance-identifier --region us-east-1 database-1 --output table |grep Address |awk '{print $(NF-1)}')
+ARN=$(aws secretsmanager list-secrets --region us-east-1 --filters "Key=tag-value, Values=project-x-rds-mysqldb-instance" --output table |grep ARN |awk '{print $(NF-1)}')
+USER=$(aws secretsmanager get-secret-value --region us-east-1 --secret-id $ARN --output table |grep -w SecretString |awk '{print $3}' |cut -d: -f2 |sed 's/password//' |tr -d '",')
+PRE_PASSWORD=$(aws secretsmanager get-secret-value --region us-east-1 --secret-id $ARN --output table |grep -w SecretString |awk '{print $3}' |cut -d: -f3 |tr -d '"')
+PASSWORD=${PRE_PASSWORD%?}
 
 # install and set up Flask
-apt-get -o Acquire::ForceIPv4=true update
 apt-get update -y && apt-get upgrade -y 
 apt-get install python3-flask mysql-client mysql-server python3-pip python3-venv -y 
 apt-get install sox ffmpeg libcairo2 libcairo2-dev -y 
@@ -19,7 +40,17 @@ apt-get install python3-dev default-libmysqlclient-dev build-essential -y
 git clone https://github.com/Kelvinskell/terra-tier.git
 cd /terra-tier
 
-# setup virtual environment
+# Populate App with environmental variables
+echo "MYSQL_ROOT_PASSWORD=$PASSWORD" > .env
+cd /terra-tier/application
+echo "MYSQL_DB=$MDB" > .env
+echo "MYSQL_HOST=$HOST" >> .env
+echo "MYSQL_USER=$USER" >> .env
+echo "DATABASE_PASSWORD=$PASSWORD" >> .env
+echo "MYSQL_ROOT_PASSWORD=$PASSWORD" >> .env
+
+# Setup virtual environment
+cd /terra-tier
 python3 -m venv venv
 source venv/bin/activate
 
