@@ -20,4 +20,3 @@ mysql = MySQL(app)
 
 
 from application import routes
-from application import create_database
