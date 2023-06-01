@@ -49,6 +49,7 @@ resource "aws_autoscaling_group" "asg" {
     ignore_changes = [ load_balancers, target_group_arns ]
   }
   depends_on = [
-    aws_efs_file_system.efs
+    aws_efs_file_system.efs,
+    aws_db_instance.mysql_instance
   ]
 }
