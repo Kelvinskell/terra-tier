@@ -52,6 +52,6 @@ data "template_file" "user_data" {
 }
 
  # Print Public IP address of bastion host
-output "public_ip" {
+output "bastion_host_public_ip" {
     value = aws_instance.bastion.public_ip
 }
