@@ -62,6 +62,7 @@ source venv/bin/activate
 
 # Run Flask Application
 pip install -r requirements.txt
-export FLASK_APP=run.py
-export FLASK_ENV=production
-flask run -h 0.0.0.0
+cp /terra-tier/newsread.service /etc/systemd/system/newsread.service
+systemctl daemon-reload
+systemctl enable newsread
+systemctl start newsread
