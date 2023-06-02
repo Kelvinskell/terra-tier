@@ -7,6 +7,7 @@ This project includes terraform scripts that automate the deployment of this app
 - Fork this repository.
 - Clone your forked repository
 - Navigate to the terraform directory
+- Edit the `backend.tf` file. Add your own remote backend or use a local backend.
 - Execute `terraform plan`
 - If you are satisfied with the output of the plan, run `terraform apply`
 - Navigate to the your AWS EC2 Console, go to the provisioned load balancer, copy your DNS name.
