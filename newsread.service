@@ -1,0 +1,14 @@
+[Unit]
+Description=A Python Flask Application
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/home/kelvin-tech/Projects/python/terra-tier
+ExecStart=flask run -h 0.0.0.0
+Environment=FLASK_APP=run.py
+Environment=FLASK_CONFIG=production
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
