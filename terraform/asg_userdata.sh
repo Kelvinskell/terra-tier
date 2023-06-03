@@ -55,10 +55,12 @@ echo "API_KEY=f39307bb61fb31ea2c458479762b9acc" >> .env
 # THIS IS BEIGN ADDED HERE SO THAT YOU CAN EASILY REPLICATE THIS INFRASTRUCTURE WITHOUT ANY HASSLES.
 # YOU CAN REPLACE IT WITH YOUR OWN MEDIASTACK API KEY.
 
-# Setup virtual environment
-cd /terra-tier
-python3 -m venv venv
-source venv/bin/activate
+# Install the CodeDeploy agent
+apt install ruby-full wget -y
+cd /home/ubuntu
+wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
+chmod +x ./install
+./install auto
 
 # Run Flask Application
 cp /terra-tier/newsread.service /etc/systemd/system/newsread.service
