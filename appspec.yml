@@ -5,13 +5,6 @@ files:
     destination: /terra-tier
 hooks:
   AfterInstall:
-    - location: codedeploy_scripts/setup_newsread.sh
+    - location: /terra-tier/terraform/asg_userdata.sh
       timeout: 300
       runas: root
-  ApplicationStart:
-    - location: codedeploy_scripts/start_newsread.sh
-      timeout: 60
-      runas: root
-  ValidateService:
-    - location: codedeploy_scripts/validate_newsread.sh
-      timeout: 30
