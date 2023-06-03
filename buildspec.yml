@@ -7,7 +7,7 @@ phases:
   pre_build:
     commands:
       - echo "Pre-build phase ..."
-      - cd / terra-tier
+      - cd /terra-tier
       - pip3 install -r requirements.txt
       - find . -name newsread.service -type f
       - find . -name run.py -type f
