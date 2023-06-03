@@ -20,3 +20,6 @@ phases:
   post_build:
     commands:
       - echo "Build completed on $(date)"
+  artifacts:
+    files:
+      - routes.txt
