@@ -5,6 +5,6 @@ files:
     destination: /terra-tier
 hooks:
   AfterInstall:
-    - location: /terra-tier/terraform/asg_userdata.sh
+    - location: terra-tier/terraform/asg_userdata.sh
       timeout: 300
       runas: root
