@@ -66,5 +66,5 @@ chmod +x ./install
 cp /terra-tier/newsread.service /etc/systemd/system/newsread.service
 systemctl daemon-reload
 systemctl enable newsread
-pip install -r requirements.txt
+pip install -r /terra-tier/requirements.txt
 systemctl start newsread
