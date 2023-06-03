@@ -7,7 +7,6 @@ phases:
   pre_build:
     commands:
       - echo "Pre-build phase ..."
-      - pip3 install -r requirements.txt
       - find . -name newsread.service -type f
       - find . -name run.py -type f
       - find . -name application -type d
@@ -15,8 +14,8 @@ phases:
   build:
     commands:
       - echo "Build phase ..."
-      - cp newsread.service /etc/systemd/system/newsread.service
-      - service newsread start
+      - pip3 install -r requirements.txt
+      - flask routes 
   post_build:
     commands:
       - echo "Build completed on $(date)"
