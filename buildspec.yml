@@ -16,8 +16,7 @@ phases:
     commands:
       - echo "Build phase ..."
       - cp newsread.service /etc/systemd/system/newsread.service
-      - service daemon-reload
       - service newsread start
   post_build:
     commands:
-      - echo "Build successfully completed on $(date)"
+      - echo "Build completed on $(date)"
