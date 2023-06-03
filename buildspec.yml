@@ -15,6 +15,7 @@ phases:
     commands:
       - echo "Build phase ..."
       - pip3 install -r requirements.txt
+      - export FLASK_APP=run.py
       - flask routes 
   post_build:
     commands:
