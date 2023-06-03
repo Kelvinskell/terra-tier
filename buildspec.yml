@@ -19,7 +19,7 @@ phases:
       - flask routes > routes.txt
   post_build:
     commands:
-      - echo "Build completed on $(date)"
+      - echo "Build completed on $(date)" >> routes.txt
 artifacts:
   files:
     - routes.txt
