@@ -62,7 +62,7 @@ source venv/bin/activate
 
 # Run Flask Application
 cp /terra-tier/newsread.service /etc/systemd/system/newsread.service
-pip install -r requirements.txt
 systemctl daemon-reload
 systemctl enable newsread
+pip install -r requirements.txt
 systemctl start newsread
