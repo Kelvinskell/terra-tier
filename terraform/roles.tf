@@ -39,7 +39,15 @@ resource "aws_iam_role" "server_role" {
             "Action": [
                 "ec2:Describe*",
                 "rds:Describe*",
-                "rds:ListTagsForResource",
+                "rds:ListTagsForResource"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject"
             ],
             "Resource": "*"
         },
