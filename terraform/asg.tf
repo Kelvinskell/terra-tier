@@ -10,9 +10,9 @@ resource "aws_autoscaling_policy" "asg-policy" {
     target_value = 50.0
   }
 
-  depends_on = [ 
+  depends_on = [
     aws_autoscaling_group.asg
-      ]
+  ]
 }
 
 # Create an AutoScaling Group
@@ -24,12 +24,12 @@ resource "aws_autoscaling_group" "asg" {
   health_check_grace_period = 480
   health_check_type         = "ELB"
   force_delete              = false
-  termination_policies = ["ClosestToNextInstanceHour", "Default"]
+  termination_policies      = ["ClosestToNextInstanceHour", "Default"]
   launch_template {
-    id = aws_launch_template.project-x-template.id
+    id      = aws_launch_template.project-x-template.id
     version = "$Latest"
   }
-  vpc_zone_identifier       = flatten([module.vpc.private_subnets[*]])
+  vpc_zone_identifier = flatten([module.vpc.private_subnets[*]])
 
   # Refresh instances if ASG is updated
   instance_refresh {
@@ -40,14 +40,14 @@ resource "aws_autoscaling_group" "asg" {
   }
 
   tag {
-    key = "Environment"
-    value = "prod"
+    key                 = "Environment"
+    value               = "prod"
     propagate_at_launch = true
   }
 
   lifecycle {
-    ignore_changes = [ load_balancers, target_group_arns ]
-    replace_triggered_by = [ aws_db_instance.mysql_instance ]
+    ignore_changes       = [load_balancers, target_group_arns]
+    replace_triggered_by = [aws_db_instance.mysql_instance]
   }
   depends_on = [
     aws_efs_file_system.efs,
