@@ -71,8 +71,10 @@ systemctl start newsread
 
 # Install CloudWatch Agent
 wget https://amazoncloudwatch-agent.s3.amazonaws.com/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
-dpkg -i -E ./amazon-cloudwatch-agent.deb
+sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
+
+# Download CloudWatch Agent Config file
 git clone  https://gist.github.com/d93be79bcbe31008decda7c3b5e25e5c.git
 
-# Run CloudWatch Agent
+# Run the CloudWatch Agent
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:d93be79bcbe31008decda7c3b5e25e5c/config.json
