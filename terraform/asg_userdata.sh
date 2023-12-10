@@ -78,3 +78,6 @@ git clone  https://gist.github.com/d93be79bcbe31008decda7c3b5e25e5c.git
 
 # Run the CloudWatch Agent
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:d93be79bcbe31008decda7c3b5e25e5c/config.json
+sleep 4
+# For some weird reason, this command has to be repeated to ensure the agent is running
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:d93be79bcbe31008decda7c3b5e25e5c/config.json
