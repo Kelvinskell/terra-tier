@@ -61,7 +61,15 @@ resource "aws_iam_role" "server_role" {
             "Action" : [
               "cloudwatch:ListMetrics",
               "cloudwatch:GetMetricStatistics",
-              "cloudwatch:Describe*"
+              "cloudwatch:Describe*",
+              "cloudwatch:PutMetricData",
+              "ec2:DescribeVolumes",
+              "ec2:DescribeTags",
+              "logs:PutLogEvents",
+              "logs:DescribeLogStreams",
+              "logs:DescribeLogGroups",
+              "logs:CreateLogStream",
+              "logs:CreateLogGroup"
             ],
             "Resource" : "*"
           },
