@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.10
+FROM python:3.9-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -8,12 +8,10 @@ WORKDIR /app
 RUN apt update -y && apt upgrade -y && apt install -y \
     python3-flask \
     python3-pip \
-    python3-venv \
     sox \
     ffmpeg \
     libcairo2 \
     libcairo2-dev \
-    python3-dev \
     default-libmysqlclient-dev \
     build-essential \
     libyaml-dev \
