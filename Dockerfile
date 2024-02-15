@@ -7,8 +7,6 @@ WORKDIR /app
 # Install system dependencies
 RUN apt update -y && apt upgrade -y && apt install -y \
     python3-flask \
-    mysql-client \
-    mysql-server \
     python3-pip \
     python3-venv \
     sox \
