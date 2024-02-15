@@ -16,7 +16,12 @@ RUN apt update -y && apt upgrade -y && apt install -y \
     python3-dev \
     default-libmysqlclient-dev \
     build-essential \
+    libyaml-dev \
+ && apt clean \
  && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip, setuptools, and wheel
+RUN pip install --upgrade pip setuptools wheel
 
 # Copy the current directory contents into the container at /app
 COPY . /app
