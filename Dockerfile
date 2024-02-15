@@ -1,27 +1,37 @@
 # Use an official Python runtime as a parent image
-FROM python:3.10-slim
+FROM python:3.10
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies for mysqlclient
-RUN apt update && apt install -y \
+# Install system dependencies
+RUN apt update -y && apt upgrade -y && apt install -y \
+    python3-flask \
+    mysql-client \
+    mysql-server \
+    python3-pip \
+    python3-venv \
+    sox \
+    ffmpeg \
+    libcairo2 \
+    libcairo2-dev \
+    python3-dev \
     default-libmysqlclient-dev \
-    gcc \
-    && apt clean
+    build-essential \
+ && rm -rf /var/lib/apt/lists/*
 
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Install any needed packages specified in requirements.txt
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Environment variables
+ENV FLASK_APP=run.py
+ENV FLASK_ENV=production
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
-# Define environment variable
-ENV FLASK_APP=run.py
-ENV FLASK_RUN_HOST=0.0.0.0
-
-# Run app.py when the container launches
-CMD ["flask", "run"]
+# Command to run the Flask application
+CMD ["flask", "run", "-h", "0.0.0.0"]
