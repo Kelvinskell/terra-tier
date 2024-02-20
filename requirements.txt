@@ -1,5 +1,6 @@
 email-validator==1.2.1
-Flask==2.1.2
+Flask==2.0.1
+Werkzeug==2.0.1
 Flask-Bcrypt==1.0.1
 Flask-Login==0.6.1
 Flask-MySQLdb==1.0.1
