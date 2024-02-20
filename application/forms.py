@@ -43,6 +43,7 @@ def create_table():
             with connection.cursor() as cursor:
                 if 'user' not in tbs:
                     cursor.execute(CREATE_TABLE)
+                    connection.commit()
             return True
 
     except mysql.connector.Error as e:
