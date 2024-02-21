@@ -6,7 +6,9 @@ from wtforms import StringField
 from wtforms import SubmitField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 import mysql.connector
+from mysql.connector import Error
 import os
+import time
 from venv import create
 from dotenv import load_dotenv
 load_dotenv()
@@ -25,32 +27,35 @@ CREATE TABLE user(
 )
 """
 
-
-def create_table():
-    # Create Table if not existing
-    try:
-        with mysql.connector.connect(
-            host=HOST,
-            user=USER,
-            password=PASSWORD,
-            database=DB
-        ) as connection:
-          with connection.cursor() as cursor:
-            cursor.execute(SHOW_TB)
-            tbs = [tb[0] for tb in cursor]
-
-            # Create Tables
-            with connection.cursor() as cursor:
+def create_table(retry_count=5, delay=5):
+    #    Create table with retries on failure
+    attempt = 0
+    while attempt < retry_count:
+        try:
+            connection = mysql.connector.connect(
+                host=HOST,
+                user=USER,
+                password=PASSWORD,
+                database=DB
+            )
+            if connection.is_connected():
+                cursor = connection.cursor()
+                cursor.execute(SHOW_TB)
+                tbs = [tb[0] for tb in cursor]
                 if 'user' not in tbs:
                     cursor.execute(CREATE_TABLE)
-            return True
-
-    except mysql.connector.Error as e:
-        print(e)
-    
+                    connection.commit()
+                connection.close()
+                print("Table created successfully.")
+                return
+        except Error as e:
+            print(f"Error connecting to MySQL: {e}")
+            time.sleep(delay)
+            attempt += 1
+            print(f"Retrying ({attempt}/{retry_count})...")
+    print("Failed to create table after several attempts.")
 
 create_table()
-
 
 class RegisterForm(FlaskForm):
     def validate_username(self, value):
