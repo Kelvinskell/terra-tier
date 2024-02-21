@@ -11,8 +11,8 @@ In addition to deploying the terra-tier application on AWS using Terraform, you 
 
 Before you begin, ensure you have the following installed on your local machine or virtual instance:
 
-- [Docker]([url](https://docs.docker.com/engine/install/))
-- [Docker Compose]([url](https://docs.docker.com/compose/install/))
+- [Docker](https://docs.docker.com/engine/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
 These tools are required to create containerized instances of the application and its required services (e.g., MySQL database).
 
